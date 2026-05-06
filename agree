@@ -1,0 +1,29 @@
+# 定义 stages（阶段）
+stages:
+  - build
+  - deploy
+
+# 构建阶段
+build:
+  stage: build
+  image: node:18
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+
+# 部署到 GitLab Pages
+pages:
+  stage: deploy
+  image: alpine:latest
+  dependencies:
+    - build
+  script:
+    - mv dist/ public/
+  artifacts:
+    paths:
+      - public/
+  only:
+    - master
