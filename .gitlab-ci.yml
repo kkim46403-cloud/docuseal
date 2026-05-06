@@ -1,0 +1,37 @@
+# .gitlab-ci.yml 示例
+image: ruby:3.2
+
+stages:
+  - lint
+  - test
+
+rubocop:
+  stage: lint
+  script:
+    - bundle install
+    - bundle exec rubocop
+
+eslint:
+  stage: lint
+  image: node:18
+  script:
+    - npm install
+    - npx eslint .
+
+erblint:
+  stage: lint
+  script:
+    - bundle install
+    - bundle exec erblint app/views/
+
+brakeman:
+  stage: lint
+  script:
+    - bundle install
+    - bundle exec brakeman --exit-on-warn
+
+rspec:
+  stage: test
+  script:
+    - bundle install
+    - bundle exec rspec
