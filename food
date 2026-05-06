@@ -1,0 +1,7 @@
+import random
+
+foods = ["拉面", "寿司", "炒饭", "汉堡", "炸鸡", "咖喱饭", "牛肉面"]
+
+choice = random.choice(foods)
+
+print("今天去吃：", choice)
