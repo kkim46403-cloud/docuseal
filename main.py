@@ -1,7 +1,13 @@
 import requests
 
-TOKEN = "8742865340:AAH9O5-qJrXGKe-aHsWXQ1ikkxNJu8O_FHE"
+TOKEN = "8742865340:AAH9O5-qJrXGKe-aHsWXQ1ikkxNJu80_FHE"
 CHAT_ID = "6764288383"
+
+# 如果你开了代理，加上下面这段
+# proxies = {
+#     "http": "http://127.0.0.1:7890",
+#     "https": "http://127.0.0.1:7890"
+# }
 
 def send(msg):
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
@@ -15,13 +21,11 @@ def get_price(symbol):
 def run():
     btc = get_price("BTCUSDT")
     eth = get_price("ETHUSDT")
-
     msg = f"""📊 行情播报
-
-BTC: {btc}
-ETH: {eth}
-"""
+BTC: {btc:.2f} USDT
+ETH: {eth:.2f} USDT"""
     send(msg)
 
 if __name__ == "__main__":
     run()
+
